@@ -12,19 +12,19 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #191919; /* Dein gewünschter Hintergrund */
+            background-color: #191919; /* Dein Hintergrund in #191919 */
             font-family: 'Roboto', sans-serif;
         }
         .flip-clock {
             display: flex;
-            font-size: 50px;
+            font-size: 80px; /* Angepasste Schriftgröße */
             color: white;
         }
         .flip-clock .digit {
             position: relative;
-            width: 60px;
-            height: 90px;
-            margin: 0 5px;
+            width: 90px;
+            height: 130px;
+            margin: 0 10px;
             background: #333;
             border-radius: 10px;
             overflow: hidden;
@@ -33,63 +33,5 @@
             justify-content: center;
             font-weight: bold;
         }
-        .flip-clock .digit span {
-            display: block;
-            width: 100%;
-            text-align: center;
-            line-height: 90px;
-            background-color: #191919;
-        }
-        .flip-clock .digit.flip span {
-            transform: rotateX(180deg);
-        }
-        .flip-clock .digit.flip span.flipped {
-            transform: rotateX(0deg);
-        }
-        /* Stil für die Trennzeichen */
-        .flip-clock .separator {
-            font-size: 50px;
-            line-height: 90px;
-            color: white;
-            margin: 0 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="flip-clock">
-        <div class="digit" id="hours">
-            <span>00</span>
-        </div>
-        <div class="separator">:</div>
-        <div class="digit" id="minutes">
-            <span>00</span>
-        </div>
-        <div class="separator">:</div>
-        <div class="digit" id="seconds">
-            <span>00</span>
-        </div>
-    </div>
+        .flip-clo
 
-    <script>
-        const updateClock = () => {
-            const now = new Date();
-            const options = {
-                timeZone: 'Europe/Berlin',  // Setzt die deutsche Zeitzone
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false // 24-Stunden-Format
-            };
-            const time = now.toLocaleTimeString('de-DE', options);
-            const [hours, minutes, seconds] = time.split(':');
-
-            document.getElementById('hours').querySelector('span').textContent = hours;
-            document.getElementById('minutes').querySelector('span').textContent = minutes;
-            document.getElementById('seconds').querySelector('span').textContent = seconds;
-        };
-
-        setInterval(updateClock, 1000);
-        updateClock(); // Initiale Anzeige der Zeit
-    </script>
-</body>
-</html>
