@@ -1,65 +1,29 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Clock</title>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #191919;
-            font-family: Arial, sans-serif;
-        }
-
-        .clock {
-            display: flex;
-            gap: 10px;
-        }
-
-        .digit {
-            background: #000;
-            color: #fff;
-            border-radius: 10px;
-            font-size: 4rem;
-            width: 80px;
-            height: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flip Clock</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="clock">
-        <div class="digit" id="hours">00</div>
-        <div class="digit">:</div>
-        <div class="digit" id="minutes">00</div>
-        <div class="digit">:</div>
-        <div class="digit" id="seconds">00</div>
+  <div class="flip-clock">
+    <div class="digit" id="hours">
+      <div class="top"></div>
+      <div class="bottom"></div>
+      <div class="flip"></div>
     </div>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
-        }
-
-        // Update the clock every second
-        setInterval(updateClock, 1000);
-
-        // Initialize clock on load
-        updateClock();
-    </script>
+    <div class="digit" id="minutes">
+      <div class="top"></div>
+      <div class="bottom"></div>
+      <div class="flip"></div>
+    </div>
+    <div class="digit" id="seconds">
+      <div class="top"></div>
+      <div class="bottom"></div>
+      <div class="flip"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
