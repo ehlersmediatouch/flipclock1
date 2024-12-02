@@ -1,97 +1,111 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Clock</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #191919; /* Hintergrundfarbe für Notion */
-            font-family: 'Roboto', sans-serif;
-        }
+<div class="flip-clock">
+  <span class="clock__piece flip">
+    <span class="clock__segment segment">
+      <span class="seg__top">10</span>
+      <span class="seg__bottom"></span>
+      <span class="seg__back">
+        <span class="seg__bottom" data-value="10"></span>
+      </span>
+      <span class="clock_period">AM</span>
+    </span>
+  </span>
+  <span class="clock__piece flip">
+    <span class="clock__segment segment">
+      <span class="seg__top">58</span>
+      <span class="seg__bottom" data-value="57"></span>
+      <span class="seg__back" data-value="57">
+        <span class="seg__bottom" data-value="58"></span>
+      </span>
+    </span>
+  </span>
+</div>
 
-        .flip-clock {
-            display: flex;
-            font-size: 80px;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 10px; /* Etwas Abstand zwischen den Zahlen */
-        }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #191919;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
 
-        .flip-clock .digit {
-            position: relative;
-            width: 120px;
-            height: 160px;
-            margin: 0 10px;
-            background: #333;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
+.flip-clock {
+    display: flex;
+    font-size: 80px;
+    color: white;
+}
 
-        .flip-clock .digit span {
-            display: block;
-            width: 100%;
-            text-align: center;
-            line-height: 160px; /* Höhe angepasst */
-            background-color: #191919;
-            font-size: 70px;
-        }
+.clock__piece {
+    position: relative;
+    width: 80px;
+    height: 100px;
+    margin: 0 5px;
+    perspective: 1000px;
+}
 
-        .flip-clock .digit.flip span {
-            transform: rotateX(180deg);
-        }
+.clock__segment {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
 
-        .flip-clock .digit.flip span.flipped {
-            transform: rotateX(0deg);
-        }
+.seg__top,
+.seg__bottom {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 60px;
+    color: white;
+    transition: all 0.5s ease;
+}
 
-        .flip-clock .separator {
-            font-size: 80px;
-            line-height: 160px;
-            color: white;
-            margin: 0 15px;
-        }
-    </style>
-</head>
-<body>
-    <div class="flip-clock">
-        <div class="digit" id="hours">
-            <span>00</span>
-        </div>
-        <div class="separator">:</div>
-        <div class="digit" id="minutes">
-            <span>00</span>
-        </div>
-    </div>
+.seg__top {
+    background-color: #191919;
+    line-height: 100px;
+}
 
-    <script>
-        const updateClock = () => {
-            const now = new Date();
-            const options = {
-                timeZone: 'Europe/Berlin',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false // 24-Stunden-Format
-            };
-            const time = now.toLocaleTimeString('de-DE', options);
-            const [hours, minutes] = time.split(':');
+.seg__bottom {
+    background-color: #333;
+    line-height: 100px;
+    transform: rotateX(90deg);
+}
 
-            document.getElementById('hours').querySelector('span').textContent = hours;
-            document.getElementById('minutes').querySelector('span').textContent = minutes;
-        };
+.seg__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #191919;
+    transform: rotateX(180deg);
+    transform-origin: center bottom;
+}
 
-        setInterval(updateClock, 1000);
-        updateClock(); // Initiale Anzeige der Zeit
-    </script>
-</body>
-</html>
+.clock_period {
+    position: absolute;
+    bottom: 5px;
+    font-size: 20px;
+    color: white;
+    font-weight: normal;
+}
+
+.flip {
+    animation: flip 1s infinite;
+}
+
+@keyframes flip {
+    0%, 100% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(180deg);
+    }
+}
