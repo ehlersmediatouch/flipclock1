@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Clock</title>
+    <title>Flip Clock with Date</title>
     <style>
         body {
             display: flex;
@@ -12,6 +12,7 @@
             height: 100vh;
             margin: 0;
             background-color: transparent;
+            flex-direction: column;
         }
 
         .flip-clock {
@@ -37,6 +38,12 @@
             display: block;
             position: relative;
         }
+
+        .date {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -47,6 +54,7 @@
         <div class="digit"><span>:</span></div>
         <div class="digit"><span id="seconds">00</span></div>
     </div>
+    <div class="date" id="date"></div>
 
     <script>
         function updateTime() {
@@ -54,15 +62,19 @@
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
-            
+
+            const day = now.getDate();
+            const month = now.getMonth() + 1; // Monate beginnen bei 0
+            const year = now.getFullYear();
+
             document.getElementById('hours').textContent = hours;
             document.getElementById('minutes').textContent = minutes;
             document.getElementById('seconds').textContent = seconds;
+            document.getElementById('date').textContent = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
         }
 
         setInterval(updateTime, 1000);
-        updateTime();  // Initial call to display the time immediately
+        updateTime();  // Initial call to display the time and date immediately
     </script>
 </body>
 </html>
-
