@@ -1,54 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Clock with Date</title>
+    <title>Flip Clock</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #191919; /* Hintergrundfarbe auf #191919 gesetzt */
-            flex-direction: column;
+            background-color: #191919; /* Ersetze dies mit deinem gewünschten Hintergrund-Hex-Wert */
+            font-family: 'Roboto', sans-serif;
         }
-
         .flip-clock {
             display: flex;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 48px;
-            font-weight: bold;
+            font-size: 50px;
+            color: white;
         }
-
-        .digit {
+        .flip-clock .digit {
+            position: relative;
+            width: 60px;
+            height: 90px;
+            margin: 0 5px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #333;
-            color: white;
-            width: 80px;
-            height: 100px;
-            margin: 0 5px;
-            border-radius: 10px;
+            font-weight: bold;
         }
-
-        .digit span {
+        .flip-clock .digit span {
             display: block;
-            position: relative;
+            width: 100%;
+            text-align: center;
+            line-height: 90px;
+            background-color: #191919; /* Hintergrundfarbe für den Wert */
         }
-
-        .date {
-            font-size: 24px;
-            color: white; /* Weißes Datum, um es von dem dunklen Hintergrund abzuheben */
-            margin-top: 20px;
+        .flip-clock .digit.flip span {
+            transform: rotateX(180deg);
+        }
+        .flip-clock .digit.flip span.flipped {
+            transform: rotateX(0deg);
         }
     </style>
 </head>
 <body>
     <div class="flip-clock">
-        <div class="digit"><span id="hours">00</span></div>
-        <div class="digit"><span>:</span></div>
-        <div class="digit"><span id="minutes">00</span></div>
-        <div class="digit">
+        <div class="digit" id="hours">
+            <span>00</span>
+        </div>
+        <div class="digit" id="minutes">
+            <span>00</span>
+        </div>
+        <div class="digit" id="seconds">
+            <span>00</span>
+        </div>
+    </div>
+
+    <script>
+        const updateClock = () => {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('hours').querySelector('span').textContent = hours;
+            document.getElementById('minutes').querySelector('span').textContent = minutes;
+            document.getElementById('seconds').querySelector('span').textContent = seconds;
+        };
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
