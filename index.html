@@ -11,7 +11,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: transparent;
+            background-color: #191919; /* Hintergrundfarbe auf #191919 gesetzt */
             flex-direction: column;
         }
 
@@ -41,7 +41,7 @@
 
         .date {
             font-size: 24px;
-            color: #333;
+            color: white; /* Weißes Datum, um es von dem dunklen Hintergrund abzuheben */
             margin-top: 20px;
         }
     </style>
@@ -51,30 +51,4 @@
         <div class="digit"><span id="hours">00</span></div>
         <div class="digit"><span>:</span></div>
         <div class="digit"><span id="minutes">00</span></div>
-        <div class="digit"><span>:</span></div>
-        <div class="digit"><span id="seconds">00</span></div>
-    </div>
-    <div class="date" id="date"></div>
-
-    <script>
-        function updateTime() {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-
-            const day = now.getDate();
-            const month = now.getMonth() + 1; // Monate beginnen bei 0
-            const year = now.getFullYear();
-
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
-            document.getElementById('date').textContent = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
-        }
-
-        setInterval(updateTime, 1000);
-        updateTime();  // Initial call to display the time and date immediately
-    </script>
-</body>
-</html>
+        <div class="digit">
