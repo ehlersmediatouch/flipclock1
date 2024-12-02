@@ -1,23 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-    body {
-        background-color: #191919; /* Wähle deine Wunschfarbe */
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flip Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: transparent;
+        }
+
+        .flip-clock {
+            display: flex;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .digit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            color: white;
+            width: 80px;
+            height: 100px;
+            margin: 0 5px;
+            border-radius: 10px;
+        }
+
+        .digit span {
+            display: block;
+            position: relative;
+        }
+    </style>
 </head>
 <body>
-    <iframe src="https://flocus.com/online-flip-clock" 
-            width="400" height="200" style="border:none;">
-    </iframe>
+    <div class="flip-clock">
+        <div class="digit"><span id="hours">00</span></div>
+        <div class="digit"><span>:</span></div>
+        <div class="digit"><span id="minutes">00</span></div>
+        <div class="digit"><span>:</span></div>
+        <div class="digit"><span id="seconds">00</span></div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();  // Initial call to display the time immediately
+    </script>
 </body>
 </html>
+
