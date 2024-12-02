@@ -3,25 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flip Clock for Notion</title>
+  <title>Flip Clock</title>
   <style>
     body {
-      background-color: #191919; /* Dark background */
+      background-color: #191919;  /* Dark background */
       font-family: 'Courier New', Courier, monospace;
-      margin: 0;
-      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      overflow: hidden;
+      height: 100vh;
+      margin: 0;
     }
 
     .flip-clock {
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 40px;
+      justify-content: center;
+      font-size: 60px;
       color: #fff;
     }
 
@@ -43,6 +41,7 @@
       align-items: center;
       border-radius: 10px;
       transform-style: preserve-3d;
+      transform: rotateX(0deg);
       transition: all 0.5s ease-in-out;
     }
 
@@ -72,6 +71,12 @@
       height: 100%;
       background-color: #111;
       transform: rotateX(180deg);
+    }
+
+    .clock_period {
+      font-size: 20px;
+      color: white;
+      margin-top: 10px;
     }
   </style>
 </head>
