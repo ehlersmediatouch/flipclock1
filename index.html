@@ -3,53 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flip Clock</title>
+  <title>Flip Clock for Notion</title>
   <style>
-    /* Basic styles for the clock */
+    body {
+      background-color: #191919; /* Dark background */
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      overflow: hidden;
+    }
+
     .flip-clock {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 48px;
-      color: white;
-      background-color: #191919;  /* Change to your background color */
-      padding: 20px;
-      border-radius: 10px;
+      font-size: 40px;
+      color: #fff;
     }
 
-    /* Styling each clock piece (the number blocks) */
     .clock__piece {
       position: relative;
-      width: 80px;
-      height: 100px;
+      width: 90px;
+      height: 120px;
       margin: 0 10px;
-      perspective: 500px; /* For 3D flip effect */
+      perspective: 500px;
     }
 
-    /* Styling for the segments (the flip blocks) */
     .clock__segment {
-      position: absolute;
       width: 100%;
-      height: 50%;
+      height: 100%;
+      position: absolute;
       background-color: #333;
-      text-align: center;
-      overflow: hidden;
-      border-radius: 5px;
-      top: 0;
-      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      transform-style: preserve-3d;
       transition: all 0.5s ease-in-out;
     }
 
-    /* The top and bottom parts of the clock segments */
     .seg__top,
     .seg__bottom {
-      position: absolute;
       width: 100%;
       height: 50%;
-      line-height: 50px;
-      font-size: 48px;
+      line-height: 60px;
+      font-size: 60px;
       color: white;
+      text-align: center;
+      position: absolute;
     }
 
     .seg__top {
@@ -58,24 +63,15 @@
 
     .seg__bottom {
       bottom: 0;
+      transform: rotateX(180deg);
     }
 
-    /* The back face of the flip segment */
     .seg__back {
       position: absolute;
       width: 100%;
       height: 100%;
       background-color: #111;
       transform: rotateX(180deg);
-    }
-
-    .clock_period {
-      position: absolute;
-      bottom: -20px;
-      font-size: 18px;
-      color: white;
-      left: 50%;
-      transform: translateX(-50%);
     }
   </style>
 </head>
@@ -100,11 +96,12 @@
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
-      
-      // Update hours and minutes
+
+      // Update the hours
       document.querySelector('.clock__piece:nth-child(1) .seg__top').textContent = hours[0];
       document.querySelector('.clock__piece:nth-child(1) .seg__bottom').textContent = hours[1];
-      
+
+      // Update the minutes
       document.querySelector('.clock__piece:nth-child(2) .seg__top').textContent = minutes[0];
       document.querySelector('.clock__piece:nth-child(2) .seg__bottom').textContent = minutes[1];
     }
