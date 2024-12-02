@@ -12,18 +12,22 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #191919; /* Dein Hintergrund in #191919 */
+            background-color: #191919; /* Hintergrundfarbe für Notion */
             font-family: 'Roboto', sans-serif;
         }
+
         .flip-clock {
             display: flex;
-            font-size: 80px; /* Angepasste Schriftgröße */
+            font-size: 80px;
             color: white;
+            text-transform: uppercase;
+            letter-spacing: 10px; /* Etwas Abstand zwischen den Zahlen */
         }
+
         .flip-clock .digit {
             position: relative;
-            width: 90px;
-            height: 130px;
+            width: 120px;
+            height: 160px;
             margin: 0 10px;
             background: #333;
             border-radius: 10px;
@@ -33,5 +37,61 @@
             justify-content: center;
             font-weight: bold;
         }
-        .flip-clo
 
+        .flip-clock .digit span {
+            display: block;
+            width: 100%;
+            text-align: center;
+            line-height: 160px; /* Höhe angepasst */
+            background-color: #191919;
+            font-size: 70px;
+        }
+
+        .flip-clock .digit.flip span {
+            transform: rotateX(180deg);
+        }
+
+        .flip-clock .digit.flip span.flipped {
+            transform: rotateX(0deg);
+        }
+
+        .flip-clock .separator {
+            font-size: 80px;
+            line-height: 160px;
+            color: white;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flip-clock">
+        <div class="digit" id="hours">
+            <span>00</span>
+        </div>
+        <div class="separator">:</div>
+        <div class="digit" id="minutes">
+            <span>00</span>
+        </div>
+    </div>
+
+    <script>
+        const updateClock = () => {
+            const now = new Date();
+            const options = {
+                timeZone: 'Europe/Berlin',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false // 24-Stunden-Format
+            };
+            const time = now.toLocaleTimeString('de-DE', options);
+            const [hours, minutes] = time.split(':');
+
+            document.getElementById('hours').querySelector('span').textContent = hours;
+            document.getElementById('minutes').querySelector('span').textContent = minutes;
+        };
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initiale Anzeige der Zeit
+    </script>
+</body>
+</html>
