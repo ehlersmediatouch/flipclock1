@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Clock Widget</title>
+    <title>Flip Clock</title>
     <style>
         body {
             margin: 0;
@@ -12,22 +12,54 @@
             align-items: center;
             height: 100vh;
             background-color: #191919;
+            font-family: Arial, sans-serif;
         }
-        iframe {
-            border: none;
+
+        .clock {
+            display: flex;
+            gap: 10px;
+        }
+
+        .digit {
+            background: #000;
+            color: #fff;
+            border-radius: 10px;
+            font-size: 4rem;
+            width: 80px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <iframe 
-        src="https://flocus.com/online-flip-clock/" 
-        style="width: 100%; height: 100%; max-width: 600px; max-height: 200px;"
-        allow="fullscreen">
-    </iframe>
+    <div class="clock">
+        <div class="digit" id="hours">00</div>
+        <div class="digit">:</div>
+        <div class="digit" id="minutes">00</div>
+        <div class="digit">:</div>
+        <div class="digit" id="seconds">00</div>
+    </div>
+
     <script>
-        // Optional: Synchronize time zone to Germany
-        const iframe = document.querySelector('iframe');
-        iframe.src = iframe.src + '?timezone=Europe/Berlin';
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initialize clock on load
+        updateClock();
     </script>
 </body>
 </html>
